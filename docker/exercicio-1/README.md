@@ -35,49 +35,57 @@ exercicio-1/
 ├── README.md             # Documentação do projeto
 └── requirements.txt      # Dependências do Python (Flask)
 ```
-
 ---
 
-## 🛠️ Instruções de Execução
+## 🛠️ Configuração do Ambiente
 
-### 1️⃣ Preparação do Ambiente
+### Pré-requisitos
+- **Docker Desktop** ou **Docker Engine** instalado e em execução
 
-1. Certifique-se de ter o [Docker Desktop](https://www.docker.com/products/docker-desktop) iniciado, ou o Docker Engine rodando.
-2. Navegue até o diretório raiz do projeto:
+## 🚀 Instruções de Execução
 
+1. Clonar o Repositório:
     ```bash
-    cd exercicio-1
+    git clone https://github.com/Tayling-Ng/orion-bootcamp-exercicios
     ```
 
-### 2️⃣ Subir a Aplicação com Docker Compose
+2. Navegar até o Diretório do Projeto:
+    ```bash
+    cd orion-bootcamp-exercicios/docker/exercicio-1
+    ```
 
-O arquivo docker-compose.yml fará o build da imagem a partir do Dockerfile e iniciará o container, mapeando a porta 3000 do host para a 3000 do container.
+3. Subir a Aplicação com Docker Compose
 
-```bash
-docker compose up
-```
+    O arquivo docker-compose.yml fará o build da imagem a partir do Dockerfile e iniciará o container, mapeando a porta 3000 do host para a 3000 do container.
 
-⚠️ ATENÇÃO: O servidor Flask exibirá um WARNING sobre ser um servidor de desenvolvimento.
-Isso é esperado e pode ser ignorado, pois o servidor está funcionando corretamente para fins de teste.
+    ```bash
+    docker compose up
+    ```
 
-### 3️⃣ Acessar a aplicação
+    ⚠️ ATENÇÃO: O servidor Flask exibirá um WARNING sobre ser um servidor de desenvolvimento.
+    Isso é esperado e pode ser ignorado, pois o servidor está funcionando corretamente para fins de teste.
 
-Após a execução, abra o navegador e acesse: http://localhost:3000
+4. Acessar a aplicação
 
-Mensagem na página: *Hello from Docker!*
-
-### 4️⃣ Encerrar a Aplicação
-
-Para parar e remover completamente os containers, volumes anônimos e a rede criada, execute:
-
-```bash
-docker compose down
-```
+    Após a execução, abra o navegador e acesse: http://localhost:3000
 
 ---
 
-## 🧑‍💻 Desenvolvedora
+## 🚀 Encerrar a Aplicação
 
-**Nome:** Tayling Ng
+1. Para remover tudo (containers e redes), mantendo os volumes:
+    ```bash
+    docker compose down
+    ```
 
-**Contato:** [LinkedIn](https://www.linkedin.com/in/tayling-ng/)
+2. Remover tudo (containers, redes e volumes):
+    ```bash
+    docker compose down -v
+    ```
+
+---
+
+## ✨ Desenvolvedora
+
+👩‍💻 **Tayling Ng**  
+🔗 [LinkedIn](https://www.linkedin.com/in/taylingng/)  

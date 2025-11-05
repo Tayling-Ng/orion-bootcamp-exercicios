@@ -39,7 +39,7 @@ A aplicação expõe uma API simples que se conecta ao PostgreSQL para gravaçã
 
 ## 📂 Estrutura de Diretórios
 
-```
+```bash
 exercicio-2/
 ├── api/
 │ ├── Dockerfile
@@ -52,20 +52,18 @@ exercicio-2/
 ├── docker-compose.yml
 └── README.md
 ```
-
+---
 
 ## 🛠️ Configuração do Ambiente
 
 ### Pré-requisitos
-- **Docker Desktop** ou **Docker Engine** instalado e em execução  
-- **WSL 2** habilitado (para Windows)
-- Porta `3000` disponível no host
+- **Docker Desktop** ou **Docker Engine** instalado e em execução 
 
 ## 🚀 Instruções de Execução
 
 1. Clonar o Repositório:
     ```bash
-    git clone https://github.com/Tayling-Ng/orion-bootcamp-exercicios/tree/main/docker/exercicio-2
+    git clone https://github.com/Tayling-Ng/orion-bootcamp-exercicios
     ```
 
 2. Navegar até o Diretório do Projeto:
@@ -99,6 +97,13 @@ exercicio-2/
     ```bash
     docker ps
     ```
+
+7. Acessar a aplicação
+
+    Após a execução, abra o navegador e acesse: http://localhost:3000
+
+---
+
 ## 🚀 Encerrar a Aplicação
 
 1. Para remover tudo (containers e redes), mantendo os volumes:
@@ -110,6 +115,8 @@ exercicio-2/
     ```bash
     docker compose down -v
     ```
+
+---
 
 ## ✨ Desenvolvedora
 
