@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  api:
+    # 1. Constrói a imagem, usando o contexto da pasta API
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+      # 2. Especifica o estágio de build 'development'
+      target: development
+    
+    # 3. Mapeia as portas para acesso
+    ports:
+      - "3000:3000"
+      
+    # 4. Monta o Bind Mount para Live Reload (código local <-> container)
+    volumes:
+      - ./api:/usr/src/app  # Mantém o código
+      - /usr/src/app/node_modules # NOVO: Volume anônimo para manter o node_modules do container
+      
+    # 5. Sobrescreve o comando para usar nodemon (Live Reload)
+    command: nodemon index.js
+    
+    # 6. Reinicia o container
+    restart: always
