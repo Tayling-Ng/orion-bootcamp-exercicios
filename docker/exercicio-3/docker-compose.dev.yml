@@ -15,7 +15,7 @@ services:
     # 4. Monta o Bind Mount para Live Reload (código local <-> container)
     volumes:
       - ./api:/usr/src/app  # Mantém o código
-      - /usr/src/app/node_modules # NOVO: Volume anônimo para manter o node_modules do container
+      - /usr/src/app/node_modules  # Evita conflitos com node_modules
       
     # 5. Sobrescreve o comando para usar nodemon (Live Reload)
     command: nodemon index.js
