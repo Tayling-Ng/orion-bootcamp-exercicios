@@ -1,0 +1,12 @@
+# Ignorar arquivos do Git e Variáveis de Ambiente
+.git
+.gitignore
+.env
+.env.example
+
+# Ignorar dependências Node.js
+api/node_modules
+
+# Ignorar arquivos de cache
+npm-debug.log
+.DS_Store
