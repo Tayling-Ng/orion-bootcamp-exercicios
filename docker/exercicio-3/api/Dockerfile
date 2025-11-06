@@ -36,10 +36,10 @@ WORKDIR /usr/src/app
 COPY api/package.json ./
 
 # Instala SÓ as dependências necessárias para rodar (sem devDependencies)
-RUN npm ci --only=production
+RUN npm install --omit=dev
 
 # Copia o código da aplicação
-COPY index.js .
+COPY api/index.js .
 
 # Expõe a porta e define o comando de inicialização
 EXPOSE 3000
