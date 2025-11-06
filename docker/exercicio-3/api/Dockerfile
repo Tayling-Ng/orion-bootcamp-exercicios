@@ -5,7 +5,7 @@ FROM node:20-alpine AS builder
 WORKDIR /usr/src/app
 
 # Copia e instala as dependências
-COPY package*.json ./
+COPY api/package.json ./
 RUN npm install
 
 
@@ -17,7 +17,7 @@ WORKDIR /usr/src/app
 
 # Copia as dependências já instaladas do estágio 'builder'
 COPY --from=builder /usr/src/app/node_modules ./node_modules
-COPY package*.json ./
+COPY api/package.json ./
 
 # Adiciona Nodemon para desenvolvimento.
 RUN npm install -g nodemon
@@ -33,7 +33,7 @@ FROM node:20-alpine AS production
 WORKDIR /usr/src/app
 
 # Copia APENAS as dependências de produção do estágio 'builder'
-COPY package*.json ./
+COPY api/package.json ./
 
 # Instala SÓ as dependências necessárias para rodar (sem devDependencies)
 RUN npm ci --only=production
