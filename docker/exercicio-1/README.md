@@ -59,7 +59,7 @@ exercicio-1/
     O arquivo docker-compose.yml fará o build da imagem a partir do Dockerfile e iniciará o container, mapeando a porta 3000 do host para a 3000 do container.
 
     ```bash
-    docker compose up
+    docker-compose up --build -d
     ```
 
     ⚠️ ATENÇÃO: O servidor Flask exibirá um WARNING sobre ser um servidor de desenvolvimento.

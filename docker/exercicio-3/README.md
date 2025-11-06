@@ -70,14 +70,14 @@ exercicio-3/
 
    ```bash
    # Carrega o .env e sobe o ambiente de desenvolvimento
-    source ./.env && docker compose -f docker-compose.dev.yml up -d --build
+    docker compose -f docker-compose.dev.yml up -d --build
    ```
 
     #### 🚀 Ambiente de Produção
 
    ```bash
    # Carrega o .env e sobe o ambiente de produção
-    source ./.env && docker compose -f docker-compose.prod.yml up -d --build
+    docker compose -f docker-compose.prod.yml up -d --build
    ```
 
 ## 🚀 Acessar a Aplicação

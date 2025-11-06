@@ -79,9 +79,10 @@ exercicio-2/
     ```
 
 4. Editar o .env para definir as variáveis de ambiente conforme necessário:
-    ```POSTGRES_USER=usuario
-    POSTGRES_PASSWORD=sua_senha
-    POSTGRES_DB=meubanco
+    ```
+    POSTGRES_PASSWORD=sua_senha_aqui
+    POSTGRES_DB=nome_do_banco
+    POSTGRES_USER=usuario
     ```
 
 5. Build e inicialização dos Containers
