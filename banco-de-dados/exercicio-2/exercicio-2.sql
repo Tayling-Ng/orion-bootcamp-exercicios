@@ -27,11 +27,10 @@ WHERE
 -- 3. UPDATE: Altere o curso_id de um aluno específico (ex: "Mover Maria para o curso de Ciência de Dados").
 
 UPDATE alunos
-SET curso_id = (SELECT id FROM cursos WHERE nome_curso = 'Segurança da Informação e Cibersegurança')
-WHERE nome = 'Aluno 001';
+SET curso_id = (SELECT id FROM cursos WHERE nome_curso = 'Cibersegurança e Redes')
+WHERE nome = 'Beatriz Rocha';
 
-# EXTRA:
-# Escreva um SELECT com LEFT JOIN e WHERE para descobrir quais cursos não possuem nenhum aluno matriculado.
+--- EXTRA: Escreva um SELECT com LEFT JOIN e WHERE para descobrir quais cursos não possuem nenhum aluno matriculado.
 
 SELECT 
   cursos.nome_curso
