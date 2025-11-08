@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+    # Serviço de Aplicação (Exemplo)
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev # Usa build com foco em ferramentas de dev
+        ports:
+            - '3000:3000'
+        volumes:
+            - ./app:/app:cached # Monta o código local para hot-reload
+        depends_on:
+            - mongodb
+        environment:
+            MONGO_URI: mongodb://mongodb:27017/blog_posts
+
+    # Serviço MongoDB
+    mongodb:
+        image: mongo:latest
+        container_name: orion_mongo_db_dev # Nome do container específico para DEV
+        ports:
+            - '27017:27017' # Porta exposta para o host (VS Code/Compass)
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: orion_user
+            MONGO_INITDB_ROOT_PASSWORD: orion_password
+        volumes:
+            - dev-db-data:/data/db # Volume persistente para dados de DEV
+
+volumes:
+    dev-db-data:
