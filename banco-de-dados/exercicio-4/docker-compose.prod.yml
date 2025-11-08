@@ -1,30 +1,12 @@
-version: '3.8'
+version: "3.8"
 
 services:
-    # Serviço de Aplicação (Exemplo)
-    app:
-        build:
-            context: .
-            dockerfile: Dockerfile.prod # Usa build final/otimizado
-        ports:
-            - '3000:3000' # Exposto para acesso do usuário
-        # SEM volumes de código (o código já está na imagem final)
-        depends_on:
-            - mongodb
-        environment:
-            MONGO_URI: mongodb://mongodb:27017/blog_posts
-            NODE_ENV: production
-
-    # Serviço MongoDB
-    mongodb:
-        image: mongo:latest
-        container_name: orion_mongo_db_prod # Nome específico para PROD
-        # Porta 27017 NÃO é exposta ao host (melhor segurança)
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: orion_user
-            MONGO_INITDB_ROOT_PASSWORD: orion_password
-        volumes:
-            - prod-db-data:/data/db # Volume persistente para dados de PROD
-
-volumes:
-    prod-db-data:
+  mongodb:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: mongo-prod
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: blog_posts
