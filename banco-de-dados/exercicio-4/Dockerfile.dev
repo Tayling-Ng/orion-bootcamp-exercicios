@@ -1,14 +1,14 @@
-version: "3.8"
+# Usa a imagem oficial do MongoDB como base
+FROM mongo:latest
 
-services:
-  mongodb:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    container_name: mongo-dev
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./data/db:/data/db
-    environment:
-      MONGO_INITDB_DATABASE: blog_posts
+# Define variáveis de ambiente úteis (pode ser genéricas)
+ENV MONGO_INITDB_DATABASE=blog_posts
+
+# Cria diretório para armazenar dados (opcional)
+VOLUME ["/data/db"]
+
+# Expõe a porta padrão do MongoDB
+EXPOSE 27017
+
+# Comando padrão ao iniciar o container
+CMD ["mongod"]
