@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  mongodb:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: mongo-dev
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: blog_posts
+    volumes:
+      - ./data/db:/data/db # volume local para persistência

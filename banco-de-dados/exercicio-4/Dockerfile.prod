@@ -1,0 +1,11 @@
+# Usa uma versão estável e leve do MongoDB
+FROM mongo:latest
+
+# Define o banco padrão (opcional)
+ENV MONGO_INITDB_DATABASE=blog_posts
+
+# Expor a porta padrão
+EXPOSE 27017
+
+# Comando padrão
+CMD ["mongod", "--bind_ip_all"]
