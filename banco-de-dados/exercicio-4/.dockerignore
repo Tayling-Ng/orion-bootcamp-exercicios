@@ -1,5 +1,6 @@
 # Ignorar arquivos do Git e Variáveis de Ambiente
 *.log
+*.log
 .git
 .gitignore
 .env
@@ -11,6 +12,9 @@ api/node_modules
 # Ignorar arquivos de cache
 npm-debug.log
 .DS_Store
+
+# Banco de dados local do Mongo
+data/db/
 
 # Banco de dados local do Mongo
 data/db/
