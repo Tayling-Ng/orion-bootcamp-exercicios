@@ -1,0 +1,14 @@
+# Ignora arquivos e pastas que não precisam entrar no contexto Docker build
+.git
+.gitignore
+.env
+.env.example
+*.md
+*.pdf
+*.jpg
+*.png
+.vscode
+docs/
+logs/
+flowise_data/
+qdrant_data/
