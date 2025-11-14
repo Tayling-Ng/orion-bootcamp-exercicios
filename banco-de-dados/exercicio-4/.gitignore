@@ -1,8 +1,0 @@
-*.log
-.env
-node_modules
-npm-debug.log
-yarn-error.log
-.vscode
-.DS_Store
-data/db/
