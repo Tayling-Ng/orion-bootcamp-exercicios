@@ -1,0 +1,46 @@
+# VARIÁVEIS DE AMBIENTE E SECRETS
+.env
+.env.local
+.env.*.local
+
+# VOLUMES DO DOCKER (dados persistentes)
+volumes/
+data/
+
+# LOGS
+*.log
+logs/
+**/logs/*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ARQUIVOS DO VSCODE
+.vscode/
+*.code-workspace
+
+# ARQUIVOS DO SISTEMA OPERACIONAL
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+# Linux
+*~
+.directory
+
+# DOCKER
+# Cache do Docker (não comum em projetos compose-only)
+*.tar
+
+# BACKUPS E TEMPORÁRIOS
+*.bak
+*.tmp
+*.swp
+*.swo
+*~
+.~*
