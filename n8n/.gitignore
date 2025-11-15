@@ -35,7 +35,7 @@ Desktop.ini
 
 # DOCKER
 # Cache do Docker (não comum em projetos compose-only)
-*.tar
+# *.tar
 
 # BACKUPS E TEMPORÁRIOS
 *.bak
