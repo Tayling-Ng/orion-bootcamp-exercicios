@@ -46,4 +46,4 @@ Desktop.ini
 .~*
 
 # CHAVES DE SERVIÇO
-n8n/service-account-key.json
+google-key.json
