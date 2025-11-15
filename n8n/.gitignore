@@ -44,3 +44,6 @@ Desktop.ini
 *.swo
 *~
 .~*
+
+# CHAVES DE SERVIÇO
+n8n/service-account-key.json
