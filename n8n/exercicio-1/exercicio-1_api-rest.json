@@ -1,13 +1,46 @@
 {
-  "name": "Google Sheets",
+  "name": "16/11 19:11 4 webhooks",
   "nodes": [
     {
       "parameters": {
+        "httpMethod": "DELETE",
+        "path": "produtos",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "id": "2296f031-4f7f-49cc-88b0-aae8f50ddde0",
+      "name": "Webhook DELETE",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        -1136,
+        1184
+      ],
+      "webhookId": "webhook-delete-produtos"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "cac088ee-29b6-4314-9cbf-50db8f52cdaa",
+      "name": "Edit Fields DELETE",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        -928,
+        1184
+      ]
+    },
+    {
+      "parameters": {
         "authentication": "serviceAccount",
+        "operation": "delete",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit?gid=1942532261#gid=1942532261",
-          "mode": "url"
+          "value": "1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ",
+          "mode": "id"
         },
         "sheetName": {
           "__rl": true,
@@ -16,16 +49,16 @@
           "cachedResultName": "produtos",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit#gid=1942532261"
         },
-        "options": {}
+        "startIndex": 14
       },
+      "id": "6c0bd926-4eb7-4314-9004-096cfe59c3ff",
+      "name": "Google Sheets DELETE",
       "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
+      "typeVersion": 4.2,
       "position": [
-        192,
-        -80
+        -736,
+        1184
       ],
-      "id": "c0daf2d1-6c9e-484c-aa11-22b178f47301",
-      "name": "Get row(s) in sheet",
       "credentials": {
         "googleApi": {
           "id": "NN3FtwnCjNfEutGN",
@@ -35,12 +68,242 @@
     },
     {
       "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"message\": \"Produto deletado com sucesso\" } }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "cb67f9fa-c4c3-4f27-870a-4630d4e8beb7",
+      "name": "Respond DELETE",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -528,
+        1184
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json[\"id\"]?.toString()}}",
+              "value2": "={{$item(0).$node[\"Webhook GET3\"].json[\"query\"][\"id\"]}}"
+            },
+            {
+              "value1": "={{$json[\"nome\"]}}",
+              "value2": "={{$item(0).$node[\"Webhook GET3\"].json[\"query\"][\"nome\"]}}"
+            },
+            {
+              "value1": "={{$json[\"categoria\"]}}",
+              "value2": "={{$item(0).$node[\"Webhook GET3\"].json[\"query\"][\"categoria\"]}}"
+            },
+            {
+              "value1": "={{$json[\"custo\"]?.toString()}}",
+              "value2": "={{$item(0).$node[\"Webhook GET3\"].json[\"query\"][\"custo\"]}}"
+            }
+          ]
+        },
+        "combineOperation": "any"
+      },
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -528,
+        -48
+      ],
+      "id": "987e1eb4-3c9d-45f9-a8fa-4c9d65ff1376"
+    },
+    {
+      "parameters": {
+        "path": "produtos",
+        "responseMode": "lastNode",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "name": "Webhook GET3",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -1152,
+        -128
+      ],
+      "id": "9ba73a82-8a9c-40f1-8b34-10920e3ac309",
+      "webhookId": "6616a90f-9496-45ba-8205-a338b2e9d2bf"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "options": {}
+      },
+      "name": "Respond GET3",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        -224
+      ],
+      "id": "251538c8-3fd3-4eef-9038-ded6c4ef1570"
+    },
+    {
+      "parameters": {
         "authentication": "serviceAccount",
-        "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit?gid=1942532261#gid=1942532261",
-          "mode": "url"
+          "value": "1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1942532261,
+          "mode": "list",
+          "cachedResultName": "produtos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit#gid=1942532261"
+        },
+        "options": {
+          "returnAllMatches": "returnAllMatches"
+        }
+      },
+      "id": "99ca013f-6894-4780-93f5-5fedd499595f",
+      "name": "Google Sheets GET4",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [
+        -944,
+        -128
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "NN3FtwnCjNfEutGN",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "id",
+              "stringValue": "={{$json[\"id\"]}}"
+            },
+            {
+              "name": "nome",
+              "stringValue": "={{$json[\"nome\"]}}"
+            },
+            {
+              "name": "categoria",
+              "stringValue": "={{$json[\"categoria\"]}}"
+            },
+            {
+              "name": "custo",
+              "type": "numberValue",
+              "numberValue": "={{$json[\"custo\"]}}"
+            }
+          ]
+        },
+        "include": "selected",
+        "options": {}
+      },
+      "id": "4a85c922-eb1c-45d9-9cde-f998e946e2e8",
+      "name": "Edit Fields GET3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        -528,
+        -224
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "df04fcdc-c5ce-4d83-a9fa-ec766e756f07",
+              "leftValue": "={{ $item(0).$node[\"Webhook GET3\"].json[\"query\"][\"id\"] === undefined \n  && $item(0).$node[\"Webhook GET3\"].json[\"query\"][\"nome\"] === undefined\n  && $item(0).$node[\"Webhook GET3\"].json[\"query\"][\"categoria\"] === undefined\n  && $item(0).$node[\"Webhook GET3\"].json[\"query\"][\"custo\"] === undefined }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -752,
+        -128
+      ],
+      "id": "d62e8122-5f7f-45c7-af78-9d7cc83bce2a",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "content": "### Testar requisições:\n\n### Produtos: http://localhost:5678/webhook-test/produtos\n\n### id: http://localhost:5678/webhook-test/produtos?id=5\n\n### nome: http://localhost:5678/webhook-test/produtos?nome=batom\n\n### custo: http://localhost:5678/webhook-test/produtos?custo=40\n\n### categoria: http://localhost:5678/webhook-test/produtos?categoria=pet",
+        "height": 352,
+        "width": 608
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        -256
+      ],
+      "id": "dcbfee45-7d99-4ec3-ba74-5f2d3fd75d0a",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Descobre o maior id existente\nlet maxId = 0;\nfor (const item of items) {\n  if (Number(item.json.id) > maxId) {\n    maxId = Number(item.json.id);\n  }\n}\n\n// Pega o novo produto do Webhook\n// Use o nome EXATO do node como aparece na sua interface (desse jeito!)\nconst webhookData = $node[\"Webhook POST1\"].json.body;\n\n// Monte o novo objeto com todos os campos\nconst novoProduto = {\n  id: maxId + 1,\n  nome: webhookData.nome,\n  custo: webhookData.custo,\n  categoria: webhookData.categoria\n};\n\nreturn [{ json: novoProduto }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        272
+      ],
+      "id": "2aac52c3-343c-4d9d-95b1-328e6d3ba6fd",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "produtos",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "id": "2cdb70d4-8adc-425e-a619-5381aacf7545",
+      "name": "Webhook POST1",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        -1152,
+        272
+      ],
+      "webhookId": "webhook-post-produtos"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ",
+          "mode": "id"
         },
         "sheetName": {
           "__rl": true,
@@ -52,11 +315,10 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "row_number": 0,
-            "id": "={{ $json.id }}",
-            "nome": "queijo",
-            "custo": "={{ $json.custo }}",
-            "categoria": "alimentação"
+            "id": "={{$json.id}}",
+            "nome": "={{$json.nome}}",
+            "custo": "={{$json.custo}}",
+            "categoria": "={{$json.categoria}}"
           },
           "matchingColumns": [
             "id"
@@ -101,6 +363,227 @@
               "type": "string",
               "canBeUsedToMatch": true,
               "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "424fcd44-e5b5-4691-93d7-4295ba3bbdae",
+      "name": "Google Sheets POST1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [
+        -512,
+        272
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "NN3FtwnCjNfEutGN",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"message\": \"Produto criado com sucesso\",\n  \"nome\": \"{{$json.nome}}\",\n  \"custo\": \"{{$json.custo}}\",\n  \"categoria\": \"{{$json.categoria}}\"\n}",
+        "options": {
+          "responseCode": 201
+        }
+      },
+      "id": "a7978908-6c32-4523-bdf1-cd29f7353b49",
+      "name": "Respond POST1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1942532261,
+          "mode": "list",
+          "cachedResultName": "produtos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit#gid=1942532261"
+        },
+        "options": {
+          "returnAllMatches": "returnAllMatches"
+        }
+      },
+      "id": "a894cf44-710e-45d7-8eed-a4ee46bfec1e",
+      "name": "Google Sheets GET5",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [
+        -928,
+        272
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "NN3FtwnCjNfEutGN",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### POST com autoincremento no id.\n\n### Terminal:\ncurl -X POST http://localhost:5678/webhook-test/produtos \n -H \"Content-Type: application/json\" \n -d '{\"nome\":\"teclado\",\"custo\":150,\"categoria\":\"informatica\"}'\n\n### Insomnia:\n### MÉTODO POST\nhttp://localhost:5678/webhook-test/produtos\n{\n  \"id\": 66,\n  \"nome\": \"monitor\",\n  \"custo\": 650,\n  \"categoria\": \"informática\"\n}",
+        "height": 384,
+        "width": 832
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        176
+      ],
+      "id": "2f42ce57-5d24-4750-93f3-58cb388a4236",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# GET",
+        "height": 80,
+        "width": 198
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1152,
+        -224
+      ],
+      "id": "39cd5c73-fc26-4ff3-b0e4-b12dd97ebf39",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# POST",
+        "height": 80,
+        "width": 198
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1152,
+        176
+      ],
+      "id": "e7ed5696-4d8f-4d24-99c7-09183ce7a05f",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "PUT",
+        "path": "produtos",
+        "responseMode": "lastNode",
+        "responseData": "allEntries",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "id": "1cf7203e-aa61-4448-b4ef-ef7c8e646847",
+      "name": "Webhook PUT1",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        -1136,
+        768
+      ],
+      "webhookId": "webhook-put-produtos"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"success\": true, \"message\": \"Produto atualizado com sucesso\" }",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "f560b7b7-628e-444f-acd4-c64d4123bbe3",
+      "name": "Respond PUT1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        768
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1942532261,
+          "mode": "list",
+          "cachedResultName": "produtos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit#gid=1942532261"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nome": "={{ $json.nome }}",
+            "categoria": "={{ $json.categoria }}",
+            "custo": "={{ $json.custo }}",
+            "id": "={{ $json.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nome",
+              "displayName": "nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "custo",
+              "displayName": "custo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "categoria",
+              "displayName": "categoria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
             },
             {
               "id": "row_number",
@@ -111,7 +594,7 @@
               "type": "number",
               "canBeUsedToMatch": true,
               "readOnly": true,
-              "removed": false
+              "removed": true
             }
           ],
           "attemptToConvertTypes": false,
@@ -119,295 +602,246 @@
         },
         "options": {}
       },
+      "id": "a2d7079b-bb4c-46df-9eba-268a2422c961",
+      "name": "Google Sheets PUT2",
       "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
+      "typeVersion": 4.2,
       "position": [
-        192,
-        480
+        -608,
+        768
       ],
-      "id": "00b828ae-132d-4376-98dc-abb99df0b81b",
-      "name": "Update row in sheet",
+      "alwaysOutputData": true,
       "credentials": {
         "googleApi": {
           "id": "NN3FtwnCjNfEutGN",
           "name": "Google Sheets account"
         }
       }
-    },
-    {
-      "parameters": {
-        "path": "produtos",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -672,
-        192
-      ],
-      "id": "4a4ed3d4-cbab-407f-a8f1-6419dd38d9c8",
-      "name": "Webhook",
-      "webhookId": "b2212500-5911-4ace-9aa2-79dee9bc67fe"
-    },
-    {
-      "parameters": {
-        "authentication": "serviceAccount",
-        "operation": "append",
-        "documentId": {
-          "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit?gid=1942532261#gid=1942532261",
-          "mode": "url"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 1942532261,
-          "mode": "list",
-          "cachedResultName": "produtos",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit#gid=1942532261"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "id": "7",
-            "nome": "sabonete",
-            "custo": "3",
-            "categoria": "higiene"
-          },
-          "matchingColumns": [
-            "id"
-          ],
-          "schema": [
-            {
-              "id": "id",
-              "displayName": "id",
-              "required": false,
-              "defaultMatch": true,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "nome",
-              "displayName": "nome",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "custo",
-              "displayName": "custo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "categoria",
-              "displayName": "categoria",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        192,
-        96
-      ],
-      "id": "ae4b8554-b62f-4d3f-bfd9-52935f97a048",
-      "name": "Append row in sheet",
-      "credentials": {
-        "googleApi": {
-          "id": "NN3FtwnCjNfEutGN",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "serviceAccount",
-        "operation": "delete",
-        "documentId": {
-          "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit?gid=1942532261#gid=1942532261",
-          "mode": "url"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 1942532261,
-          "mode": "list",
-          "cachedResultName": "produtos",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1k33Mo-qtd1U9JRmFo7obkx0dMjihbp7X9N0VGV7rwTQ/edit#gid=1942532261"
-        },
-        "startIndex": 8,
-        "numberToDelete": 3
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        192,
-        272
-      ],
-      "id": "d8b94c90-bb95-43e9-abc4-387ca7321ce3",
-      "name": "Delete rows or columns from sheet",
-      "credentials": {
-        "googleApi": {
-          "id": "NN3FtwnCjNfEutGN",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "respondWith": "allIncomingItems",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.4,
-      "position": [
-        464,
-        -80
-      ],
-      "id": "2a3fe418-bc3a-44e4-923f-3ee2497eb4c0",
-      "name": "Respond to Webhook"
-    },
-    {
-      "parameters": {
-        "mode": "expression",
-        "output": "={{\n  (() => {\n    switch ($json.operacao) {\n      case 'read':\n        return 0;\n      case 'create':\n        return 1;\n      case 'delete':\n        return 2;\n      case 'update':\n        return 3;\n      default:\n        return 0; // Default case\n    }\n  })()\n}}"
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.3,
-      "position": [
-        -160,
-        160
-      ],
-      "id": "a86395ae-49d9-4988-87e4-2035390035bf",
-      "name": "Switch",
-      "alwaysOutputData": false,
-      "executeOnce": false,
-      "retryOnFail": false,
-      "maxTries": 2
-    },
-    {
-      "parameters": {
-        "respondWith": "allIncomingItems",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.4,
-      "position": [
-        464,
-        96
-      ],
-      "id": "77dfa3a8-3526-4627-8904-bfddb0c79217",
-      "name": "Respond to Webhook1"
-    },
-    {
-      "parameters": {
-        "respondWith": "allIncomingItems",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.4,
-      "position": [
-        464,
-        272
-      ],
-      "id": "edd15aba-52c4-49d8-920d-0e9dc158d9c1",
-      "name": "Respond to Webhook2"
-    },
-    {
-      "parameters": {
-        "respondWith": "allIncomingItems",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.4,
-      "position": [
-        448,
-        480
-      ],
-      "id": "43967427-a9d6-41e4-8111-106ded795f6b",
-      "name": "Respond to Webhook3"
     },
     {
       "parameters": {
         "assignments": {
           "assignments": [
             {
-              "id": "b7ad2072-d018-46cf-91c7-08c3efd5dbeb",
-              "name": "operacao",
-              "value": "={{ $json.query.operacao }}",
-              "type": "string"
-            },
-            {
-              "id": "627dff16-3311-41e6-bea2-c2e87bb1ca57",
+              "id": "3ff72a82-572e-4943-a98b-7cffa11b9c2e",
               "name": "id",
-              "value": "={{ $json.query.id }}",
+              "value": "={{ $json.body.id.toString() }}",
               "type": "string"
             },
             {
-              "id": "ab37e16f-79db-49ca-831b-f07a24c8d46c",
+              "id": "f7bc7568-5eae-41cd-b592-efd40e0fc5e3",
+              "name": "nome",
+              "value": "={{$json.body.nome}}",
+              "type": "string"
+            },
+            {
+              "id": "7abda923-7e91-4fec-8ce6-8ccf610c585a",
               "name": "custo",
-              "value": "={{ $json.query.custo }}",
+              "value": "={{$json.body.custo.toString() }}",
+              "type": "string"
+            },
+            {
+              "id": "5282769a-aebc-45aa-a390-25f2d0624377",
+              "name": "categoria",
+              "value": "={{$json.body.categoria}}",
               "type": "string"
             }
           ]
         },
-        "options": {
-          "ignoreConversionErrors": false,
-          "dotNotation": false
-        }
+        "options": {}
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -416,
-        192
+        -864,
+        768
       ],
-      "id": "53c21d7f-fbf8-4d14-a620-544db6df8583",
+      "id": "1c26cbbe-8488-4b28-8653-eae5724e2111",
       "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "# PUT",
+        "height": 80,
+        "width": 198
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1136,
+        672
+      ],
+      "id": "fb1244ad-57e7-4f9c-bd34-9d1cf5e847f4",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "### Terminal:\ncurl -X PUT http://localhost:5678/webhook-test/produtos \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"id\":6,\"nome\":\"teclado\",\"custo\":150,\"categoria\":\"informatica\"}'\n\n### Insomnia:\n### MÉTODO PUT\nhttp://localhost:5678/webhook-test/produtos\n{\n  \"id\": 66,\n  \"nome\": \"monitor\",\n  \"custo\": 650,\n  \"categoria\": \"informática\"\n}",
+        "height": 336,
+        "width": 832
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        672
+      ],
+      "id": "c25d2036-0ca3-43a6-bd64-e38837818321",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "# DELETE",
+        "height": 80,
+        "width": 198
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1136,
+        1088
+      ],
+      "id": "1986a7c7-04b6-4b45-8b14-d81cc28406a6",
+      "name": "Sticky Note7"
     }
   ],
   "pinData": {},
   "connections": {
-    "Get row(s) in sheet": {
+    "Webhook DELETE": {
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "Edit Fields DELETE",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Update row in sheet": {
+    "Edit Fields DELETE": {
       "main": [
         [
           {
-            "node": "Respond to Webhook3",
+            "node": "Google Sheets DELETE",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Webhook": {
+    "Google Sheets DELETE": {
+      "main": [
+        [
+          {
+            "node": "Respond DELETE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "Webhook GET3": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets GET4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets GET4": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields GET3": {
+      "main": [
+        [
+          {
+            "node": "Respond GET3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields GET3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook POST1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets GET5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets POST1": {
+      "main": [
+        [
+          {
+            "node": "Respond POST1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets POST1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets GET5": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook PUT1": {
       "main": [
         [
           {
@@ -418,54 +852,11 @@
         ]
       ]
     },
-    "Append row in sheet": {
+    "Google Sheets PUT2": {
       "main": [
         [
           {
-            "node": "Respond to Webhook1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Delete rows or columns from sheet": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch": {
-      "main": [
-        [
-          {
-            "node": "Get row(s) in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Append row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Delete rows or columns from sheet",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Update row in sheet",
+            "node": "Respond PUT1",
             "type": "main",
             "index": 0
           }
@@ -476,7 +867,7 @@
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "Google Sheets PUT2",
             "type": "main",
             "index": 0
           }
@@ -484,15 +875,15 @@
       ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "2c9e24be-9eaf-4772-a0ab-ca76da4cf232",
+  "versionId": "704a1f3c-dac1-4a40-a66d-626172b2b0e9",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "17576d04a48f54985c12ebc1d2b2cfafcb6d27445b37136e1fd9c012527b9a9e"
   },
-  "id": "L7Veaw7xfZkvuowq",
+  "id": "pnBMQmXRYF6rKN69",
   "tags": []
 }
